@@ -51,7 +51,7 @@ The system should correctly determine whether both represent the same physical l
 - Encapsulation
 - Unit Conversion
 - Method Overriding
-- Floating Point Comparison
+- Floating Point Comparison 
 - Unit Testing
 
 ### Outcome
