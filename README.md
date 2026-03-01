@@ -334,7 +334,7 @@ The application now handles multiple measurement categories while maintaining ty
 ---
 
 ## UC10 - Generic Quantity Class with Unit Interface for Multi-Category Support
-
+ 
 ### Objective
 To refactor the system by introducing a `Unit` interface that enables true generic support for multiple measurement categories such as Length and Weight.
 
