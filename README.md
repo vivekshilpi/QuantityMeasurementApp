@@ -5,7 +5,7 @@
 ### Objective
 To verify equality of two length values measured in feet.
 
-### Problem Statement
+### Problem Statement 
 Given two length values in feet, check whether they are equal.
 
 ### Implementation
