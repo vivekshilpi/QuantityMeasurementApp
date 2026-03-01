@@ -27,7 +27,7 @@ Successfully compared two length objects based on value instead of reference.
 
 ---
 
-## UC2 - Compare Length in Feet and Inches
+## UC2 - Compare Length in Feet and Inches 
 
 ### Objective
 To verify equality between length values measured in different units (Feet and Inches).
