@@ -298,7 +298,7 @@ The system is now more modular, extensible, and aligned with solid design princi
 ## UC9 - Weight Measurement
 
 ### Objective
-To extend the Quantity Measurement system to support weight units in addition to length units.
+To extend the Quantity Measurement system to support weight units in addition to length units. 
 
 ### Problem Statement
 Until now, the system handled only length measurements.  
