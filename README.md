@@ -465,7 +465,7 @@ The system now supports full arithmetic capabilities while maintaining scalable 
 
 ### Objective
 To refactor arithmetic operations (addition, subtraction, division) by centralizing the logic in order to strictly enforce the DRY (Don't Repeat Yourself) principle.
-
+ 
 ### Problem Statement
 With multiple arithmetic operations implemented (add, subtract, divide), there was duplication in:
 
