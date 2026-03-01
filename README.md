@@ -9,7 +9,7 @@ To verify equality of two length values measured in feet.
 Given two length values in feet, check whether they are equal.
 
 ### Implementation
-- Created a `Feet` class
+- Created a `Feet` class 
 - Stored length value as `double`
 - Overridden `equals()` method to compare values
 - Written JUnit test cases 
