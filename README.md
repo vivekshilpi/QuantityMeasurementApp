@@ -12,7 +12,7 @@ Given two length values in feet, check whether they are equal.
 - Created a `Feet` class
 - Stored length value as `double`
 - Overridden `equals()` method to compare values
-- Written JUnit test cases
+- Written JUnit test cases 
  
 ### Concepts Used
 - OOP
