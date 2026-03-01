@@ -215,7 +215,7 @@ The system now supports arithmetic operations in addition to comparison and conv
 
 ---
 
-## UC7 - Addition with Target Unit Specification
+## UC7 - Addition with Target Unit Specification 
 
 ### Objective
 To enhance the addition functionality by allowing the result to be returned in a specified target unit.
