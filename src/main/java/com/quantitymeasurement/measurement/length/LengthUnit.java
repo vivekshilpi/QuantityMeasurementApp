@@ -1,6 +1,6 @@
-package com.lengthmeasurement;
+package com.quantitymeasurement.measurement.length;
 
-import com.measurement.IMeasurable;
+import com.quantitymeasurement.measurement.IMeasurable;
 
 public enum LengthUnit implements IMeasurable {
 

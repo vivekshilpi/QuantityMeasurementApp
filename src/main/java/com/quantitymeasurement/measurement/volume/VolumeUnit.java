@@ -1,19 +1,19 @@
-package com.weightmeasurement;
+package com.quantitymeasurement.measurement.volume;
 
-import com.measurement.IMeasurable;
+import com.quantitymeasurement.measurement.IMeasurable;
 
-public enum WeightUnit implements IMeasurable {
+public enum VolumeUnit implements IMeasurable {
 
-    GRAM(1.0),            // Base unit
-    KILOGRAM(1000.0),
-    MILLIGRAM(0.001),
-    POUND(453.59237),
-    TONNE(1_000_000.0);
+    LITRE(1.0, "Litre"),
+    MILLILITRE(0.001, "Millilitre"),
+    GALLON(3.78541, "Gallon");
 
     private final double conversionFactor;
+    private final String unitName;
 
-    WeightUnit(double conversionFactor) {
+    VolumeUnit(double conversionFactor, String unitName) {
         this.conversionFactor = conversionFactor;
+        this.unitName = unitName;
     }
 
     @Override
@@ -33,6 +33,6 @@ public enum WeightUnit implements IMeasurable {
 
     @Override
     public String getUnitName() {
-        return name();
+        return unitName;
     }
 }
