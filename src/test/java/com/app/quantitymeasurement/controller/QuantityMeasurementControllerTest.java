@@ -1,82 +1,104 @@
 package com.app.quantitymeasurement.controller;
 
-import com.app.quantitymeasurement.dto.QuantityDTO;
+import com.app.quantitymeasurement.dto.QuantityInputDTO;
+import com.app.quantitymeasurement.dto.QuantityMeasurementDTO;
+import com.app.quantitymeasurement.exception.GlobalExceptionHandler;
+import com.app.quantitymeasurement.model.OperationType;
 import com.app.quantitymeasurement.service.IQuantityMeasurementService;
-import org.junit.jupiter.api.BeforeEach;
+import java.util.List;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentMatchers;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityFilterAutoConfiguration;
+import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@WebMvcTest(
+        controllers = QuantityMeasurementController.class,
+        excludeAutoConfiguration = {
+                SecurityAutoConfiguration.class,
+                UserDetailsServiceAutoConfiguration.class,
+                SecurityFilterAutoConfiguration.class
+        }
+)
+@AutoConfigureMockMvc(addFilters = false)
+@Import(GlobalExceptionHandler.class)
 class QuantityMeasurementControllerTest {
 
-    private QuantityMeasurementController controller;
+    @Autowired
+    private MockMvc mockMvc;
 
-    @BeforeEach
-    void setUp() {
-        controller = new QuantityMeasurementController(new StubQuantityMeasurementService());
+    @MockBean
+    private IQuantityMeasurementService service;
+
+    @Test
+    void compareEndpointReturnsStructuredResponse() throws Exception {
+        String request = """
+                {
+                  "thisQuantityDTO": {"value": 1.0, "unit": "FOOT", "measurementType": "LengthUnit"},
+                  "thatQuantityDTO": {"value": 12.0, "unit": "INCH", "measurementType": "LengthUnit"}
+                }
+                """;
+
+        when(service.compare(ArgumentMatchers.any(), ArgumentMatchers.any()))
+                .thenReturn(new QuantityMeasurementDTO(
+                        1L, 1.0, "FOOT", "LengthUnit",
+                        12.0, "INCH", "LengthUnit",
+                        OperationType.COMPARE, "true", false, null, null
+                ));
+
+        mockMvc.perform(post("/api/v1/quantities/compare")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(request))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.operationType").value("COMPARE"))
+                .andExpect(jsonPath("$.result").value("true"))
+                .andExpect(jsonPath("$.error").value(false));
+
+        verify(service).compare(ArgumentMatchers.any(), ArgumentMatchers.any());
     }
 
     @Test
-    void testPerformComparison_DelegatesToService() {
-        QuantityDTO q1 = new QuantityDTO(10.0, "FOOT", "length");
-        QuantityDTO q2 = new QuantityDTO(10.0, "INCH", "length");
+    void invalidInputReturnsBadRequest() throws Exception {
+        String invalidRequest = """
+                {
+                  "thisQuantityDTO": {"value": 1.0, "unit": "INVALID", "measurementType": "LengthUnit"},
+                  "thatQuantityDTO": {"value": 12.0, "unit": "INCH", "measurementType": "LengthUnit"}
+                }
+                """;
 
-        boolean result = controller.performComparison(q1, q2);
-
-        assertTrue(result);
+        mockMvc.perform(post("/api/v1/quantities/compare")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(invalidRequest))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.error").value("Quantity Measurement Error"));
     }
 
     @Test
-    void testPerformConversion_DelegatesToService() {
-        QuantityDTO q = new QuantityDTO(1.0, "FOOT", "length");
+    void historyEndpointReturnsMeasurements() throws Exception {
+        when(service.getHistoryByOperation(OperationType.COMPARE))
+                .thenReturn(List.of(new QuantityMeasurementDTO(
+                        1L, 1.0, "FOOT", "LengthUnit",
+                        12.0, "INCH", "LengthUnit",
+                        OperationType.COMPARE, "true", false, null, null
+                )));
 
-        QuantityDTO result = controller.performConversion(q, "INCH");
-
-        assertNotNull(result);
-        assertEquals("INCH", result.getUnit());
-    }
-
-    @Test
-    void testPerformAdditionSubtractionDivision_DelegatesToService() {
-        QuantityDTO q1 = new QuantityDTO(5.0, "FOOT", "length");
-        QuantityDTO q2 = new QuantityDTO(2.0, "FOOT", "length");
-
-        assertNotNull(controller.performAddition(q1, q2));
-        assertNotNull(controller.performSubtraction(q1, q2));
-        assertFalse(controller.performDivision(q1, q2) < 0);
-    }
-
-    private static class StubQuantityMeasurementService implements IQuantityMeasurementService {
-
-        @Override
-        public boolean compare(QuantityDTO q1, QuantityDTO q2) {
-            return Double.compare(q1.getValue(), q2.getValue()) == 0;
-        }
-
-        @Override
-        public QuantityDTO convert(QuantityDTO quantity, String targetUnit) {
-            return new QuantityDTO(quantity.getValue(), targetUnit, quantity.getMeasurementType());
-        }
-
-        @Override
-        public QuantityDTO add(QuantityDTO q1, QuantityDTO q2) {
-            return new QuantityDTO(q1.getValue() + q2.getValue(), q1.getUnit(), q1.getMeasurementType());
-        }
-
-        @Override
-        public QuantityDTO subtract(QuantityDTO q1, QuantityDTO q2) {
-            return new QuantityDTO(q1.getValue() - q2.getValue(), q1.getUnit(), q1.getMeasurementType());
-        }
-
-        @Override
-        public double divide(QuantityDTO q1, QuantityDTO q2) {
-            if (q2.getValue() == 0.0) {
-                return 0.0;
-            }
-            return q1.getValue() / q2.getValue();
-        }
+        mockMvc.perform(get("/api/v1/quantities/history/operation/COMPARE"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].operationType").value("COMPARE"))
+                .andExpect(jsonPath("$[0].result").value("true"));
     }
 }
