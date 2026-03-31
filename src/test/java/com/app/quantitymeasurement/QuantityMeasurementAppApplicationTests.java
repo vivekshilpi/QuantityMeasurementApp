@@ -1,6 +1,5 @@
-package com.app.quantitymeasurement.unit;
+package com.app.quantitymeasurement;
 
-import com.app.quantitymeasurement.QuantityMeasurementApplication;
 import com.app.quantitymeasurement.dto.QuantityInputDTO;
 import com.app.quantitymeasurement.model.OperationType;
 import com.app.quantitymeasurement.repository.QuantityMeasurementRepository;

@@ -1,23 +1,23 @@
 package com.app.quantitymeasurement.controller;
 
-import com.app.quantitymeasurement.dto.QuantityInputDTO;
 import com.app.quantitymeasurement.dto.QuantityMeasurementDTO;
 import com.app.quantitymeasurement.exception.GlobalExceptionHandler;
 import com.app.quantitymeasurement.model.OperationType;
+import com.app.quantitymeasurement.repository.UserRepository;
+import com.app.quantitymeasurement.security.JwtAuthenticationFilter;
+import com.app.quantitymeasurement.security.JwtUtil;
+import com.app.quantitymeasurement.security.OAuth2SuccessHandler;
 import com.app.quantitymeasurement.service.IQuantityMeasurementService;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentMatchers;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
-import org.springframework.boot.autoconfigure.security.servlet.SecurityFilterAutoConfiguration;
-import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -26,14 +26,10 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(
-        controllers = QuantityMeasurementController.class,
-        excludeAutoConfiguration = {
-                SecurityAutoConfiguration.class,
-                UserDetailsServiceAutoConfiguration.class,
-                SecurityFilterAutoConfiguration.class
-        }
-)
+/**
+ * Controller tests with security disabled via mocking.
+ */
+@WebMvcTest(controllers = QuantityMeasurementController.class)
 @AutoConfigureMockMvc(addFilters = false)
 @Import(GlobalExceptionHandler.class)
 class QuantityMeasurementControllerTest {
@@ -41,8 +37,20 @@ class QuantityMeasurementControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @MockBean
+    @MockitoBean
     private IQuantityMeasurementService service;
+
+    @MockitoBean
+    private JwtUtil jwtUtil;
+
+    @MockitoBean
+    private JwtAuthenticationFilter jwtAuthenticationFilter;
+
+    @MockitoBean
+    private OAuth2SuccessHandler oAuth2SuccessHandler;
+
+    @MockitoBean
+    private UserRepository userRepository;
 
     @Test
     void compareEndpointReturnsStructuredResponse() throws Exception {

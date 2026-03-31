@@ -21,6 +21,35 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+/*
+ * =========================================================
+ * Quantity Measurement REST Controller
+ * =========================================================
+ *
+ * UC17 – REST Controller Layer
+ *
+ * Purpose:
+ * Exposes quantity measurement operations as REST APIs.
+ *
+ * Responsibilities:
+ * - Receive HTTP requests
+ * - Validate request body
+ * - Delegate operations to Service Layer
+ * - Return JSON responses
+ *
+ * Base URL:
+ * /api/v1/quantities
+ *
+ * Example Endpoints:
+ *
+ * POST /api/v1/quantities/compare
+ * POST /api/v1/quantities/convert
+ * POST /api/v1/quantities/add
+ * POST /api/v1/quantities/subtract
+ * POST /api/v1/quantities/divide
+ */
+
+
 @Validated
 @RestController
 @RequestMapping(

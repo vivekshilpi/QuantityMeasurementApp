@@ -10,6 +10,18 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+/*
+ * =========================================================
+ * Global Exception Handler
+ * =========================================================
+ *
+ * Handles exceptions thrown across the entire application.
+ *
+ * Instead of returning raw stack traces or HTTP 500 errors,
+ * this class converts exceptions into meaningful HTTP responses.
+ */
+
+
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
