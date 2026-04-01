@@ -103,7 +103,7 @@ class QuantityMeasurementControllerTest {
                         12.0, "INCH", "LengthUnit",
                         OperationType.COMPARE, "true", false, null, null
                 )));
-
+ 
         mockMvc.perform(get("/api/v1/quantities/history/operation/COMPARE"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].operationType").value("COMPARE"))

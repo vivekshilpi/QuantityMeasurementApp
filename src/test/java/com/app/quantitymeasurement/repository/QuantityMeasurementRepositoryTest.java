@@ -34,7 +34,7 @@ class QuantityMeasurementRepositoryTest {
 
         assertEquals(2, repository.countByOperationAndErrorFalse(OperationType.ADD));
     }
-
+ 
     private QuantityMeasurementEntity createEntity(OperationType operationType, boolean error, String measurementType) {
         QuantityMeasurementEntity entity = new QuantityMeasurementEntity();
         entity.setOperation(operationType);

@@ -49,7 +49,7 @@ import org.springframework.web.bind.annotation.RestController;
  * POST /api/v1/quantities/divide
  */
 
-
+ 
 @Validated
 @RestController
 @RequestMapping(

@@ -257,7 +257,7 @@ public class QuantitySubtractionAndDivisionTest {
 
 	        assertNotEquals(left, right);
 	    }
-
+  
 	    @Test
 	    void testSubtractionAndDivision_Integration() {
 	        double result =

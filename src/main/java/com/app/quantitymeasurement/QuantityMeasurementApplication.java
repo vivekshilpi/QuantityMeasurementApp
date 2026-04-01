@@ -22,4 +22,4 @@ public class QuantityMeasurementApplication {
     public static void main(String[] args) {
         SpringApplication.run(QuantityMeasurementApplication.class, args);
     }
-}
+} 

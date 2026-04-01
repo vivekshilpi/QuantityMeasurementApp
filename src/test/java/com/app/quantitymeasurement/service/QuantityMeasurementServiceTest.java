@@ -68,7 +68,7 @@ class QuantityMeasurementServiceTest {
                 new QuantityDTO(1.0, "FOOT", "LengthUnit", null),
                 new QuantityDTO(1.0, "KILOGRAM", "WeightUnit", null)
         ));
-
+ 
         verify(repository).save(argThat(entity -> entity.isError() && entity.getOperation() == OperationType.ADD));
     }
 

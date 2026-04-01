@@ -24,4 +24,4 @@ public interface IMeasurable {
     default void validateOperationSupport(String operation) {
         // default: do nothing (all units support arithmetic)
     }
-}
+} 

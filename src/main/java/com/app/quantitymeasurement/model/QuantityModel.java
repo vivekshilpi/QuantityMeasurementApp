@@ -36,4 +36,4 @@ public class QuantityModel<U extends IMeasurable> {
     public U getUnit() {
         return unit;
     }
-}
+} 

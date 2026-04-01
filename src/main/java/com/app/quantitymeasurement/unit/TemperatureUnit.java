@@ -49,7 +49,7 @@ public enum TemperatureUnit implements IMeasurable {
                 throw new IllegalStateException();
         }
     }
-
+ 
     @Override
     public boolean supportsArithmetic() {
         return false;

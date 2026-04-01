@@ -47,7 +47,7 @@ public class GlobalExceptionHandler {
     ) {
         return buildResponse(
                 HttpStatus.BAD_REQUEST,
-                "Quantity Measurement Error",
+                "Quantity Measurement Error", 
                 exception.getMessage(),
                 request.getRequestURI()
         );

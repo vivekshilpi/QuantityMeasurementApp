@@ -228,7 +228,7 @@ public class TemperatureMeasurementTest {
         assertThrows(IllegalArgumentException.class,
                 () -> new Quantity<>(100.0, null));
     }
-
+ 
     @Test
     void testTemperatureNullOperandValidation_InComparison() {
         Quantity<TemperatureUnit> q =

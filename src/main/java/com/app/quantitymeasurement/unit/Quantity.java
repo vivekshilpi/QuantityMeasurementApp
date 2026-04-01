@@ -168,7 +168,7 @@ public class Quantity<U extends IMeasurable> {
 
         public double compute(double a, double b) {
             return operator.applyAsDouble(a, b);
-        }
+        } 
     }
 
     // ROUNDING HELPER

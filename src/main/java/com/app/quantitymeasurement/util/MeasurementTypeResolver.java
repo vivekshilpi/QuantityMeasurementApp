@@ -82,7 +82,7 @@ public final class MeasurementTypeResolver {
                 case "INCHES" -> LengthUnit.INCH.name();
                 default -> normalized;
             };
-        }
+        } 
 
         if (VolumeUnit.class.equals(unitClass)) {
             return switch (normalized) {

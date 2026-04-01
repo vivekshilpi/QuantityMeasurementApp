@@ -47,7 +47,7 @@ public class AuthController {
                     GsonFactory.getDefaultInstance()
             )
                     .setAudience(Collections.singletonList(googleClientId))
-                    .build();
+                     .build();
 
             GoogleIdToken idToken = verifier.verify(request.getToken());
 

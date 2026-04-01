@@ -71,7 +71,7 @@ public class QuantityMeasurementEntity {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @PrePersist
+    @PrePersist 
     public void onCreate() {
         LocalDateTime now = LocalDateTime.now();
         createdAt = now;

@@ -21,4 +21,4 @@ public enum OperationType {
             throw new IllegalArgumentException("Invalid operation type: " + value, exception);
         }
     }
-}
+}  

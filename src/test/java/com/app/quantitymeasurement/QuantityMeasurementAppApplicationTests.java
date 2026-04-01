@@ -39,7 +39,7 @@ class QuantityMeasurementAppApplicationTests {
     void clearRepository() {
         repository.deleteAll();
     }
-
+ 
     @Test
     void contextLoads() {
         assertNotNull(mockMvc);

@@ -350,7 +350,7 @@ public class QuantityTest {
 
      assertEquals(9.5, result.getValue(), EPSILON);
  }
-
+ 
  @Test
  void testDivide_UC12_BehaviorPreserved() {
      double result =

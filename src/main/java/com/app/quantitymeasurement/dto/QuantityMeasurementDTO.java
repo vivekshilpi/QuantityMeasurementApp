@@ -135,7 +135,7 @@ public class QuantityMeasurementDTO {
                 null
         );
     }
-
+ 
     public static QuantityMeasurementDTO failure(
             OperationType operationType,
             QuantityDTO thisQuantity,

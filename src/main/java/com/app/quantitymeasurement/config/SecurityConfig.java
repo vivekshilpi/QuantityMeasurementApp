@@ -40,7 +40,7 @@ public class SecurityConfig {
             "/oauth2/**",
             "/login/**"
     };
-
+ 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http

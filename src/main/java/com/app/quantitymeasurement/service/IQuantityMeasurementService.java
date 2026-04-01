@@ -24,4 +24,4 @@ public interface IQuantityMeasurementService {
     List<QuantityMeasurementDTO> getErroredHistory();
 
     long getOperationCount(OperationType operationType);
-}
+} 

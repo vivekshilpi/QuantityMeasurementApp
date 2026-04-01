@@ -222,7 +222,7 @@ public class QuantityMeasurementServiceImpl implements IQuantityMeasurementServi
     private <U extends Enum<U> & IMeasurable> Quantity<U> createQuantity(QuantityDTO dto, Class<U> unitClass) {
         U unit = MeasurementTypeResolver.resolveUnit(dto.getMeasurementType(), dto.getUnit(), unitClass);
         return new Quantity<>(dto.getValue(), unit);
-    }
+    } 
 
     private String formatQuantity(Quantity<? extends IMeasurable> quantity) {
         return formatNumber(quantity.getValue()) + " " + quantity.getUnit().getUnitName();

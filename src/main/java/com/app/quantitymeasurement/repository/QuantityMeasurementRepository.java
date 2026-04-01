@@ -25,4 +25,4 @@ public interface QuantityMeasurementRepository extends JpaRepository<QuantityMea
     long countByOperationAndErrorFalse(OperationType operation);
 
     List<QuantityMeasurementEntity> findByErrorTrue();
-}
+} 

@@ -9,4 +9,4 @@ public class DatabaseException extends QuantityMeasurementException {
     public DatabaseException(String message, Throwable cause) {
         super(message, cause);
     }
-}
+} 
