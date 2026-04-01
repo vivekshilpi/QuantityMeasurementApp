@@ -1,0 +1,8 @@
+com/app/quantitymeasurement/unit/QuantitySubtractionAndDivisionTest.class
+com/app/quantitymeasurement/unit/QuantityTest.class
+com/app/quantitymeasurement/repository/QuantityMeasurementRepositoryTest.class
+com/app/quantitymeasurement/controller/QuantityMeasurementControllerTest.class
+com/app/quantitymeasurement/unit/VolumeMeasurementTest.class
+com/app/quantitymeasurement/service/QuantityMeasurementServiceTest.class
+com/app/quantitymeasurement/QuantityMeasurementAppApplicationTests.class
+com/app/quantitymeasurement/unit/TemperatureMeasurementTest.class
