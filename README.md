@@ -641,7 +641,7 @@ Refactored the system using `IMeasurable` abstraction, making the architecture m
   [UC17 - Spring Backend](https://github.com/vivekshilpi/QuantityMeasurementApp/tree/feature/UC17-SpringBackend/src)
 
 ---
-### 📅 UC18: Spring Security – Google Authentication & JWT  
+### 📅 UC18: Spring Security – Google Authentication & JWT   
 
 - **Description:**  
   Secured the Spring Boot application using Spring Security with Google OAuth2 authentication and JWT-based authorization for stateless API access.
