@@ -615,7 +615,7 @@ Refactored the system using `IMeasurable` abstraction, making the architecture m
   [UC16–JDBCPersistence](https://github.com/vivekshilpi/QuantityMeasurementApp/tree/feature/UC16-JDBCIntegration/src)
 
 ---
-### 📅 UC17: Spring Framework Integration - REST Services & JPA  
+### 📅 UC17: Spring Framework Integration - REST Services & JPA   
 
 - **Description:**  
   Migrated the application to a Spring Boot REST service with embedded server, replacing JDBC with Spring Data JPA for ORM-based persistence.
