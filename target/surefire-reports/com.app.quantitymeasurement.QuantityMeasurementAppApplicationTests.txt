@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.app.quantitymeasurement.QuantityMeasurementAppApplicationTests
--------------------------------------------------------------------------------
-Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.911 s -- in com.app.quantitymeasurement.QuantityMeasurementAppApplicationTests
