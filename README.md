@@ -584,7 +584,7 @@ Refactored the system using `IMeasurable` abstraction, making the architecture m
 
 ---
 
-###  UC16: Database Persistence Layer Integration
+###  UC16: Database Persistence Layer Integration 
 
 * **Description:**
   UC16 extends the N-Tier architecture by replacing the cache-based repository with a **database-backed persistence layer**. The application now stores and retrieves quantity measurements using JDBC and a connection pool. This improves scalability and enables persistent storage while maintaining the same layered architecture introduced in UC15.
