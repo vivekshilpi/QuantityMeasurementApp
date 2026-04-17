@@ -1,0 +1,10 @@
+.git
+.DS_Store
+.metadata
+.settings
+.classpath
+.project
+bin
+target
+**/target
+legacy/monolith-archive/src/test

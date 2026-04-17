@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.app.quantitymeasurement.repository.QuantityMeasurementRepositoryTest
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 13.58 s -- in com.app.quantitymeasurement.repository.QuantityMeasurementRepositoryTest

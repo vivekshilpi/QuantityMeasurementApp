@@ -87,3 +87,6 @@ build/
 Thumbs.db
 
 /.metadata/
+
+# Docker
+.env

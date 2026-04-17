@@ -1,0 +1,87 @@
+services:
+  mysql:
+    image: mysql:8.4
+    container_name: quantity-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: MySql@123
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./docker/mysql/init:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-pMySql@123"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  service-registry:
+    build:
+      context: .
+      dockerfile: service-registry/Dockerfile
+    container_name: service-registry
+    ports:
+      - "8761:8761"
+
+  auth-service:
+    build:
+      context: .
+      dockerfile: auth-service/Dockerfile
+    container_name: auth-service
+    environment:
+      EUREKA_SERVER_URL: http://service-registry:8761/eureka
+      EUREKA_INSTANCE_HOSTNAME: auth-service
+      AUTH_DB_URL: jdbc:mysql://mysql:3306/quantitymeasurement_auth
+      AUTH_DB_USERNAME: root
+      AUTH_DB_PASSWORD: MySql@123
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET:-}
+      AUTH_OAUTH_REDIRECT_URI: http://localhost:8080/api/v1/auth/oauth2/success
+      JWT_SECRET: 9f8d7c6b5a4e3d2c1b0a9f8d7c6b5a4e1234567890abcdef1234567890abcdef
+    depends_on:
+      mysql:
+        condition: service_healthy
+      service-registry:
+        condition: service_started
+    ports:
+      - "8081:8081"
+
+  quantity-service:
+    build:
+      context: .
+      dockerfile: quantity-service/Dockerfile
+    container_name: quantity-service
+    environment:
+      EUREKA_SERVER_URL: http://service-registry:8761/eureka
+      EUREKA_INSTANCE_HOSTNAME: quantity-service
+      QUANTITY_DB_URL: jdbc:mysql://mysql:3306/quantitymeasurement_quantity
+      QUANTITY_DB_USERNAME: root
+      QUANTITY_DB_PASSWORD: MySql@123
+      JWT_SECRET: 9f8d7c6b5a4e3d2c1b0a9f8d7c6b5a4e1234567890abcdef1234567890abcdef
+    depends_on:
+      mysql:
+        condition: service_healthy
+      service-registry:
+        condition: service_started
+    ports:
+      - "8082:8082"
+
+  api-gateway:
+    build:
+      context: .
+      dockerfile: api-gateway/Dockerfile
+    container_name: api-gateway
+    environment:
+      EUREKA_SERVER_URL: http://service-registry:8761/eureka
+    depends_on:
+      service-registry:
+        condition: service_started
+      auth-service:
+        condition: service_started
+      quantity-service:
+        condition: service_started
+    ports:
+      - "8080:8080"
+
+volumes:
+  mysql-data:
